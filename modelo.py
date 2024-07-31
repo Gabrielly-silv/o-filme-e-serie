@@ -19,8 +19,8 @@ class Programa:
     def dar_likes(self):
         self._likes += 1
 
-    def imprime(self):
-        print(f'{self.nome} - {self.ano} - {self._likes} likes')
+    def __str__(self):
+        return f'{self.nome} - {self.ano} - {self._likes} likes'
 
 class Filme(Programa):
     def __init__(self, nome, ano, duracao):
@@ -34,15 +34,29 @@ class Serie(Programa):
         self.temporadas = temporadas
         self._likes = 0
 
- 
-vingadores = Filme('vingadores - guerra infinita', 2018, 160)
+class playlist(list):
+    def __init__(self,nome,programas):
+        self.nome = nome 
+        super().__init__(programas)
+
+
+vingadores = Filme('Vingadores - Guerra infinita', 2018, 160)
+atlanta = Serie('Atlanta', 2018, 2)
+tmep = Filme('Todo mundo em pânico', 1999, 100)
+demolidor = Serie('Demolidor', 2016, 2 )
+
 vingadores.dar_likes()
-
-atlanta =Serie('atlanta', 2018, 2)
 atlanta.dar_likes()
-atlanta.dar_likes()
+tmep.dar_likes()
+demolidor.dar_likes()
 
-filmes_e_series = [vingadores, atlanta]
+filmes_e_series = [vingadores, atlanta, demolidor, tmep]
+playlist_fim_de_semana = playlist ('fim de semana', filmes_e_series)
 
-for programa in filmes_e_series:
-    programa.imprime()
+print (f'Tamanho da playlist: {len(playlist_fim_de_semana)}')
+
+for programa in playlist_fim_de_semana: 
+    print (programa)
+
+print(f'Está ou não está? {demolidor in playlist_fim_de_semana}') 
+
